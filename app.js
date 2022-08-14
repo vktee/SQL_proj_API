@@ -28,29 +28,31 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// app.get('/getWeatherToronto', (req, res) => {
-//   request('https://www.google.com', function (error, response, body) {
-//     if (!error && response.statusCode === 200) {
-//       res.send(body);
-//     }
-//   });
-// });
-
 const axios = require('axios');
-// const params = {
-//   access_key: '0a97fbf0f1e8a36ab7702851227b567a',
-//   query: 'New York',
-// };
+
+const options = {
+  method: 'GET',
+  url: 'https://alpha-vantage.p.rapidapi.com/query',
+  params: {
+    interval: '5min',
+    function: 'TIME_SERIES_INTRADAY',
+    symbol: 'MSFT',
+    datatype: 'json',
+    output_size: 'compact',
+  },
+  headers: {
+    'X-RapidAPI-Key': '323eb200eamsh2317ec9d577583ap18dd12jsnbe3a22e14014',
+    'X-RapidAPI-Host': 'alpha-vantage.p.rapidapi.com',
+  },
+};
 
 axios
-  .get('https://www.shiborithreads.com', {})
-  .then((response) => {
-    const apiResponse = response.data;
-    console.log(apiResponse);
-    // console.log(`Current temperature in ${apiResponse.location}`);
+  .request(options)
+  .then(function (response) {
+    console.log(response.data);
   })
-  .catch((error) => {
-    console.log(error);
+  .catch(function (error) {
+    console.error(error);
   });
 
 // error handler
