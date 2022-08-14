@@ -8,7 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
-var request = require('request');
+const axios = require('axios');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,8 +27,6 @@ app.use('/users', usersRouter);
 app.use(function (req, res, next) {
   next(createError(404));
 });
-
-const axios = require('axios');
 
 const options = {
   method: 'GET',
