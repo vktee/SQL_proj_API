@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 const axios = require('axios');
+const { Client } = require('pg');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,18 +30,12 @@ app.use(function (req, res, next) {
 });
 
 const options = {
-  method: 'GET',
-  url: 'https://alpha-vantage.p.rapidapi.com/query',
-  params: {
-    interval: '5min',
-    function: 'TIME_SERIES_INTRADAY',
-    symbol: 'MSFT',
-    datatype: 'json',
-    output_size: 'compact',
-  },
+  method: 'POST',
+  url: 'https://sameer-kumar-aztro-v1.p.rapidapi.com/',
+  params: { sign: 'aquarius', day: 'today' },
   headers: {
     'X-RapidAPI-Key': '323eb200eamsh2317ec9d577583ap18dd12jsnbe3a22e14014',
-    'X-RapidAPI-Host': 'alpha-vantage.p.rapidapi.com',
+    'X-RapidAPI-Host': 'sameer-kumar-aztro-v1.p.rapidapi.com',
   },
 };
 
